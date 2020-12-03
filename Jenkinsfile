@@ -23,6 +23,14 @@ pipeline {
                 }
             }
         }
+        stage('SonarQube') {
+            steps {
+                withSonarQubeEnv('sonar') //Nombre del SonarQube Server de Configurar Sistema en Jenkins 
+                { // You can override the credential to be used
+                    sh './mvnw org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar'
+                }
+            }
+        }
         stage('RunJar') {
             steps {
                 dir('/Users/kuroi/Desktop/DiplomadoDevOps/ejemplo-maven'){
